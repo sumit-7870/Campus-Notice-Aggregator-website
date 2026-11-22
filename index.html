@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- This line makes the page fit phone screens (responsive) -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Notice Aggregator</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== Page header ===== -->
+  <header class="site-header">
+    <h1>Campus Notice Aggregator</h1>
+    <p>Collect, search and track every campus notice in one place.</p>
+  </header>
+
+  <main>
+
+    <!-- Success / error message appears here -->
+    <div id="message" class="message hidden" role="status"></div>
+
+    <!-- ===== Dashboard / summary view ===== -->
+    <section class="summary" aria-label="Summary">
+      <div class="stat">
+        <span class="stat-number" id="count-total">0</span>
+        <span class="stat-label">Total notices</span>
+      </div>
+      <div class="stat stat-pending">
+        <span class="stat-number" id="count-pending">0</span>
+        <span class="stat-label">Pending</span>
+      </div>
+      <div class="stat stat-published">
+        <span class="stat-number" id="count-published">0</span>
+        <span class="stat-label">Published</span>
+      </div>
+      <div class="stat stat-archived">
+        <span class="stat-number" id="count-archived">0</span>
+        <span class="stat-label">Archived</span>
+      </div>
+    </section>
+
+    <!-- Progress bar: how many notices are published -->
+    <section class="progress-box">
+      <p id="progress-text">0 of 0 notices published</p>
+      <div class="progress-track">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <p class="category-line" id="category-summary"></p>
+    </section>
+
+    <div class="layout">
+
+      <!-- ===== Form: add or update a notice ===== -->
+      <section class="panel">
+        <h2 id="form-title">Add a notice</h2>
+
+        <form id="notice-form" novalidate>
+          <label for="title">Title</label>
+          <input type="text" id="title" placeholder="e.g. Library closed on Sunday">
+          <span class="error" id="title-error"></span>
+
+          <label for="description">Details</label>
+          <textarea id="description" rows="4" placeholder="Write the notice here"></textarea>
+          <span class="error" id="description-error"></span>
+
+          <label for="category">Category</label>
+          <select id="category">
+            <option value="">Choose a category</option>
+            <option>Academic</option>
+            <option>Exams</option>
+            <option>Events</option>
+            <option>Placements</option>
+            <option>Hostel</option>
+            <option>Sports</option>
+          </select>
+          <span class="error" id="category-error"></span>
+
+          <label for="department">Posted by (department)</label>
+          <input type="text" id="department" placeholder="e.g. Examination Cell">
+          <span class="error" id="department-error"></span>
+
+          <label for="date">Date</label>
+          <input type="date" id="date">
+          <span class="error" id="date-error"></span>
+
+          <label for="status">Status</label>
+          <select id="status">
+            <option>Pending</option>
+            <option>Published</option>
+            <option>Archived</option>
+          </select>
+
+          <div class="button-row">
+            <button type="submit" id="save-button" class="btn btn-main">Add notice</button>
+            <button type="button" id="cancel-button" class="btn btn-light hidden">Cancel edit</button>
+          </div>
+        </form>
+      </section>
+
+      <!-- ===== Notice list with search and filters ===== -->
+      <section class="panel">
+        <h2>All notices</h2>
+
+        <div class="toolbar">
+          <input type="search" id="search" placeholder="Search by title, details or department" aria-label="Search notices">
+          <select id="filter-category" aria-label="Filter by category">
+            <option value="">All categories</option>
+            <option>Academic</option>
+            <option>Exams</option>
+            <option>Events</option>
+            <option>Placements</option>
+            <option>Hostel</option>
+            <option>Sports</option>
+          </select>
+          <select id="filter-status" aria-label="Filter by status">
+            <option value="">All statuses</option>
+            <option>Pending</option>
+            <option>Published</option>
+            <option>Archived</option>
+          </select>
+        </div>
+
+        <p id="result-count" class="result-count"></p>
+
+        <!-- JavaScript fills this list -->
+        <div id="notice-list"></div>
+      </section>
+
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <p>Campus Notice Aggregator &ndash; notices are saved in your browser.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
